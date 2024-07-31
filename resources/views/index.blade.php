@@ -43,10 +43,10 @@
             </div>
         </aside>
 
-        <div class="sm:ml-64 flex flex-col justify-between items-stretch h-screen">
+        <div class="sm:ml-64 flex flex-col justify-between items-stretch h-screen p-4">
             <div>
                 @include('layout.header')
-                <div class="bg-white p-4 rounded-md shadow m-4">
+                <div class="bg-white p-4 rounded-md shadow mt-4">
                     @yield('dash-content')
                 </div>
             </div>
