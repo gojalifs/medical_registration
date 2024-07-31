@@ -20,7 +20,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-open antialiased bg-gray-100">
+<body class="font-open antialiased bg-gray-100 h-full">
     @yield('content')
 
 </body>

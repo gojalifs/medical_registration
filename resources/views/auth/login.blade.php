@@ -1,7 +1,39 @@
 @extends('app')
 
 @section('content')
-    <div class="sm:max-w-[600px] mx-auto border rounded-md">
-        Login
+    <div class="flex flex-col items-center justify-center h-screen">
+        <div class="sm:w-[600px] mx-auto border rounded-md px-8 py-3 bg-white space-y-4 shadow-sm">
+            <div class="text-center text-xl">
+                Login
+            </div>
+            <div>
+                <form action="{{ route('login.do') }}" method="post" class="space-y-4">
+                    @if ($errors->any())
+                        <div class="text-red-400">
+                            {{ $errors->first() }}
+                        </div>
+                    @endif
+                    @csrf
+                    <div class="space-y-2">
+                        <div>
+                            <label for="email">Email</label>
+                        </div>
+                        <input type="email" name="email" id="email" placeholder="Masukkan email..." class="w-full"
+                            required autofocus>
+                    </div>
+                    <div class="space-y-2">
+                        <div>
+                            <label for="password">Password</label>
+                        </div>
+                        <input type="password" name="password" id="password" placeholder="Masukkan password..."
+                            class="w-full" required>
+                    </div>
+                    <div>
+                        <a href="" class="text-blue-600 hover:text-blue-500">Lupa kata sandi?</a>
+                    </div>
+                    <button type="submit" class="bg-blue-400 px-2 py-1 hover:bg-blue-500">Login</button>
+                </form>
+            </div>
+        </div>
     </div>
 @endsection
