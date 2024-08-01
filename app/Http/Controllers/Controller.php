@@ -26,6 +26,11 @@ abstract class Controller
                     'icon' => 'svg/master-pemeriksaan.svg'
                 ],
                 (object) [
+                    'title' => 'Data Analis Kesehatan',
+                    'route' => route('admin.analis'),
+                    'icon' => 'svg/pasien.svg'
+                ],
+                (object) [
                     'title' => 'Data Pasien',
                     'route' => route('admin.pasien'),
                     'icon' => 'svg/pasien.svg'
