@@ -21,6 +21,11 @@ abstract class Controller
                     'icon' => 'svg/dashboard.svg'
                 ],
                 (object) [
+                    'title' => 'Master Ruangan',
+                    'route' => route('admin.ruangan'),
+                    'icon' => 'svg/room.png'
+                ],
+                (object) [
                     'title' => 'Master Jenis Pemeriksaan',
                     'route' => route('admin.jenis'),
                     'icon' => 'svg/master-pemeriksaan.svg'
@@ -28,12 +33,12 @@ abstract class Controller
                 (object) [
                     'title' => 'Data Analis Kesehatan',
                     'route' => route('admin.analis'),
-                    'icon' => 'svg/pasien.svg'
+                    'icon' => 'svg/profile.svg'
                 ],
                 (object) [
                     'title' => 'Data Pasien',
                     'route' => route('admin.pasien'),
-                    'icon' => 'svg/pasien.svg'
+                    'icon' => 'svg/profile.svg'
                 ],
             ];
         } else if (Auth::user()->role == 'ANALYST') {

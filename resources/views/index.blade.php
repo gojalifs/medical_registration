@@ -20,7 +20,7 @@
                 <div class="mt-8 mb-4">
                     <img src="svg/illustration.svg" alt="" class="size-12 sm:size-24 mx-auto">
                 </div>
-                <div class="text-center uppercase text-2xl">Medical Checkup</div>
+                <div class="text-center uppercase text-2xl">{{$pageTitle ?? 'Medical Checkup'}}</div>
                 <hr class="my-6">
                 <ul class="space-y-2 font-medium">
                     @foreach ($sidebar as $m)
