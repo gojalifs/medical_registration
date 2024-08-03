@@ -20,11 +20,11 @@ abstract class Controller
                     'route' => route('dashboard'),
                     'icon' => 'svg/dashboard.svg'
                 ],
-                (object) [
-                    'title' => 'Master Ruangan',
-                    'route' => route('admin.ruangan'),
-                    'icon' => 'svg/room.png'
-                ],
+                // (object) [
+                //     'title' => 'Master Ruangan',
+                //     'route' => route('admin.ruangan'),
+                //     'icon' => 'svg/room.png'
+                // ],
                 (object) [
                     'title' => 'Master Jenis Pemeriksaan',
                     'route' => route('admin.jenis'),
