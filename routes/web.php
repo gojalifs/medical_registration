@@ -19,7 +19,7 @@ Route::middleware('authenticate')->group(function () {
         Route::get('/jenis-pemeriksaan', [JenisPemeriksaanController::class, 'index'])->name('admin.jenis');
         Route::post('/jenis-pemeriksaan', [JenisPemeriksaanController::class, 'store'])->name('admin.jenis.save');
         Route::post('/jenis-pemeriksaan/update', [JenisPemeriksaanController::class, 'update'])->name('admin.jenis.update');
-        // Route::delete('/jenis-pemeriksaan/{id}', [JenisPemeriksaanController::class, 'destroy'])->name('admin.jenis.update');
+        Route::post('/jenis-pemeriksaan/delete', [JenisPemeriksaanController::class, 'destroy'])->name('admin.jenis.delete');
 
         Route::get('/data-analis', [AnalisController::class, 'index'])->name('admin.analis');
         Route::post('/data-analis', [AnalisController::class, 'store'])->name('admin.analis.save');

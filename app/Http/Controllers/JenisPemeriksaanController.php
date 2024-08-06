@@ -6,6 +6,7 @@ use App\Models\JenisPemeriksaan;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Log;
 
@@ -49,4 +50,22 @@ class JenisPemeriksaanController extends Controller
 
         return redirect()->back()->with('success', 'Sukses mengubah master data jenis pemeriksaan.');
     }
+
+    public function destroy(Request $request): RedirectResponse
+    {
+        try {
+            $result = DB::table('jenis_pemeriksaans')->where('id', '=', $request->id)->delete();
+
+            if ($result > 0) {
+                return redirect()->back()->with('success', 'Sukses menghapus data jenis pemeriksaan.');
+            } else {
+                return redirect()->back()->withErrors('message', 'erjadi kesalahan. Gagal menyimpan, silahkan ulangi.');
+            }
+
+        } catch (Exception $e) {
+            Log::debug($e->getMessage());
+            return redirect()->back()->withErrors(['message' => 'Terjadi kesalahan. Gagal menyimpan, silahkan ulangi.']);
+        }
+    }
+
 }
