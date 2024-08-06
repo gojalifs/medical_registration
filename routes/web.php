@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalisController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisPemeriksaanController;
@@ -17,12 +18,15 @@ Route::middleware('authenticate')->group(function () {
 
         Route::get('/jenis-pemeriksaan', [JenisPemeriksaanController::class, 'index'])->name('admin.jenis');
         Route::post('/jenis-pemeriksaan', [JenisPemeriksaanController::class, 'store'])->name('admin.jenis.save');
-        // Route::get('/jenis-pemeriksaan/{:id}', [JenisPemeriksaanController::class, 'showEdit'])->name('admin.jenis.edit.index');
         Route::post('/jenis-pemeriksaan/update', [JenisPemeriksaanController::class, 'update'])->name('admin.jenis.update');
+        // Route::delete('/jenis-pemeriksaan/{id}', [JenisPemeriksaanController::class, 'destroy'])->name('admin.jenis.update');
 
-        Route::get('/ruangan', [JenisPemeriksaanController::class, 'index'])->name('admin.ruangan');
+        Route::get('/data-analis', [AnalisController::class, 'index'])->name('admin.analis');
+        Route::post('/data-analis', [AnalisController::class, 'store'])->name('admin.analis.save');
+        Route::post('/data-analis/update', [AnalisController::class, 'update'])->name('admin.analis.update');
+        Route::post('/data-analis/{id}', [AnalisController::class, 'destroy'])->name('admin.analis.delete');
+
         Route::get('/data-pasien', [DashboardController::class, 'jenis'])->name('admin.pasien');
-        Route::get('/data-analis', [DashboardController::class, 'jenis'])->name('admin.analis');
     });
 
 });
