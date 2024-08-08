@@ -2,22 +2,11 @@
 
 @section('dash-content')
     <div>
-        <div class="flex justify-between">
-            <div>Data Tim Analis</div>
-            <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-                class="flex bg-green-400 hover:bg-teal-300 px-3 py-1">
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M5 12h14m-7 7V5" />
-                </svg>
-                Tambah
-            </button>
-        </div>
+        <div>Data Registrasi</div>
         <table class="table-auto mt-8">
             <thead>
                 <th class="border px-8 py-1">No.</th>
-                <th class="border px-8 py-1">Nama Analis</th>
+                <th class="border px-8 py-1">Nama Pasien</th>
                 <th class="border px-8 py-1">Email</th>
                 <th class="border px-8 py-1">No. HP</th>
                 <th class="border px-8 py-1">Jenis Kelamin</th>
@@ -74,7 +63,7 @@
                                 <div
                                     class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                        Ubah Master Data Tim Analis
+                                        Ubah Master Data Registrasi
                                     </h3>
                                     <button type="button"
                                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -95,8 +84,7 @@
                                         <div class="col-span-2">
                                             <label for="name"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
-                                                Analis
-                                                Kesehatan</label>
+                                                Pasien</label>
                                             <input type="text" name="name" id="name"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                 placeholder="Ketikkan nama analis..." value="{{ $p->name }}" required>
@@ -141,14 +129,6 @@
                                                 focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                 value="{{ $p->birth }}" required>
                                         </div>
-                                        <div class="col-span-2">
-                                            <label
-                                                for="password"class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata
-                                                Sandi Baru</label>
-                                            <input type="password" name="password" id="password"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Buat password baru untuk Analis..." required>
-                                        </div>
                                     </div>
                                     <button type="submit"
                                         class="mx-8 mb-4 text-white inline-flex items-center bg-teal-500 hover:bg-teal-600 hover:ring-teal-700
@@ -180,7 +160,7 @@
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Tambah Master Data Tim Analis
+                        Tambah Master Data Registrasi
                     </h3>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -199,8 +179,7 @@
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">
                             <label for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Analis
-                                Kesehatan</label>
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pasien</label>
                             <input type="text" name="name" id="name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="Ketikkan nama analis..." required>
@@ -242,13 +221,6 @@
                                 class="bg-gray-50 mr-2 border border-gray-300 text-gray-900 text-sm rounded-lg 
                                 focus:ring-primary-600 focus:border-primary-600 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 required>
-                        </div>
-                        <div class="col-span-2">
-                            <label for="password"class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata
-                                Sandi Baru</label>
-                            <input type="password" name="password" id="password"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Buat password baru untuk Analis..." required>
                         </div>
                     </div>
                     <button type="submit"

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class UserMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role == 'USER'){
-            return redirect()->route('user.dashboard');
+        if (Auth::user()->role == 'ADMIN'){
+            return redirect()->route('admin.dashboard');
         } 
         if(Auth::user()->role == 'ANALYST'){
             return redirect()->route('analyst.dashboard');

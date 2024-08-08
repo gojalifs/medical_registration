@@ -18,27 +18,27 @@ abstract class Controller
                 (object) [
                     'title' => 'Dashboard',
                     'route' => route('dashboard'),
-                    'icon' => 'svg/dashboard.svg'
+                    'icon' => '/svg/dashboard.svg'
                 ],
                 // (object) [
                 //     'title' => 'Master Ruangan',
                 //     'route' => route('admin.ruangan'),
-                //     'icon' => 'svg/room.png'
+                //     'icon' => '/svg/room.png'
                 // ],
                 (object) [
                     'title' => 'Master Jenis Pemeriksaan',
                     'route' => route('admin.jenis'),
-                    'icon' => 'svg/master-pemeriksaan.svg'
+                    'icon' => '/svg/master-pemeriksaan.svg'
                 ],
                 (object) [
                     'title' => 'Data Analis Kesehatan',
                     'route' => route('admin.analis'),
-                    'icon' => 'svg/profile.svg'
+                    'icon' => '/svg/profile.svg'
                 ],
                 (object) [
-                    'title' => 'Data Pasien',
+                    'title' => 'Data Registrasi',
                     'route' => route('admin.pasien'),
-                    'icon' => 'svg/profile.svg'
+                    'icon' => '/svg/note.svg'
                 ],
             ];
         } else if (Auth::user()->role == 'ANALYST') {
@@ -46,17 +46,17 @@ abstract class Controller
                 (object) [
                     'title' => 'Dashboard',
                     'route' => route('analyst.dashboard'),
-                    'icon' => 'svg/dashboard.svg'
+                    'icon' => '/svg/dashboard.svg'
                 ],
-                (object) [
-                    'title' => 'Data Pasien',
-                    'route' => route('analyst.pasien'),
-                    'icon' => 'svg/pasien.svg'
-                ],
+                // (object) [
+                //     'title' => 'Data Pasien',
+                //     'route' => route('analyst.pasien'),
+                //     'icon' => '/svg/pasien.svg'
+                // ],
                 (object) [
                     'title' => 'Data Pemeriksaan',
                     'route' => route('analyst.pemeriksaan'),
-                    'icon' => 'svg/data-pemeriksaan.svg'
+                    'icon' => '/svg/data-pemeriksaan.svg'
                 ],
             ];
         } else {
@@ -64,17 +64,17 @@ abstract class Controller
                 (object) [
                     'title' => 'Dashboard',
                     'route' => route('user.dashboard'),
-                    'icon' => 'svg/dashboard.svg'
+                    'icon' => '/svg/dashboard.svg'
                 ],
                 (object) [
-                    'title' => 'Registrasi',
+                    'title' => 'Registrasi MCU',
                     'route' => route('user.regis'),
-                    'icon' => 'svg/regis.svg'
+                    'icon' => '/svg/regis.svg'
                 ],
                 (object) [
                     'title' => 'Data Pemeriksaan',
                     'route' => route('user.pemeriksaan'),
-                    'icon' => 'svg/data-pemeriksaan.svg'
+                    'icon' => '/svg/data-pemeriksaan.svg'
                 ],
             ];
         }

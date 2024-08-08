@@ -11,7 +11,8 @@ class Pemeriksaan extends Model
 
     protected $fillable = [
         'user_id',
-        'golongan_darah',
+        'tanggal',
+        'selesai',
         'note'
     ];
 }

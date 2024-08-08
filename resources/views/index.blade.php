@@ -18,9 +18,9 @@
             aria-label="Sidebar">
             <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
                 <div class="mt-8 mb-4">
-                    <img src="svg/illustration.svg" alt="" class="size-12 sm:size-24 mx-auto">
+                    <img src="/svg/illustration.svg" alt="" class="size-12 sm:size-24 mx-auto">
                 </div>
-                <div class="text-center uppercase text-2xl">{{$pageTitle ?? 'Medical Checkup'}}</div>
+                <div class="text-center uppercase text-2xl">{{ $pageTitle ?? 'Medical Checkup' }}</div>
                 <hr class="my-6">
                 <ul class="space-y-2 font-medium">
                     @foreach ($sidebar as $m)
@@ -34,8 +34,9 @@
                     @endforeach
                     <hr>
                     <li class="hover:bg-red-300">
-                        <a href="" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group">
-                            <img src="svg/logout.svg" alt="" class="size-8">
+                        <a href="{{ route('logout') }}"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group">
+                            <img src="/svg/logout.svg" alt="" class="size-8">
                             <span class="ms-3">Logout</span>
                         </a>
                     </li>

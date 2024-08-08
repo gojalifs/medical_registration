@@ -11,6 +11,7 @@ class HasilPemeriksaan extends Model
 
     protected $fillable = [
         'pemeriksaan_id',
+        'analyst_id',
         'hasil',
         'keterangan'
     ];
