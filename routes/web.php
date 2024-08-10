@@ -51,6 +51,7 @@ Route::middleware('authenticate')->group(function () {
         Route::get('/pedaftaran', [RegistrasiMCUController::class, 'index'])->name('user.regis');
         Route::post('/pedaftaran', [RegistrasiMCUController::class, 'store'])->name('user.regis.store');
         Route::get('/riwayat', [RiwayatUController::class, 'index'])->name('user.pemeriksaan');
-    });
+        Route::get('/generate_pdf/{id}', [RiwayatUController::class, 'pdf'])->name('generate_pdf');
 
+    });
 });
