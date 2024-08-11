@@ -36,7 +36,8 @@
 <body>
     <div>
         <div>
-            <img src="/clinic.png" alt="" style="float: left; margin-right: 16px; height: 100px; width: auto;">
+            <img src="{{ public_path('/clinic.png') }}" alt=""
+                style="float: left; margin-right: 16px; height: 100px; width: auto;">
             <div style="height: 100px; align-items: center">
                 <div style="font-size: 24px; line-height: 32px; font-weight: 500; width: auto;">
                     Medical Checkup Clinic
@@ -55,19 +56,23 @@
         </div>
         <div style="margin: 0 48px;">
             <div style="display: flex; margin: 16px 0;">
-                <div style="width: 144px;">Nama</div>
+                <div style="width: 144px; float: left;">Nama</div>
                 <div>: {{ $result->name }}</div>
             </div>
             <div style="display: flex; margin: 16px 0;">
-                <div style="width: 144px;">Email</div>
+                <div style="width: 144px; float: left;">Email</div>
                 <div>: {{ $result->email }}</div>
             </div>
             <div style="display: flex; margin: 16px 0;">
-                <div style="width: 144px;">No. HP</div>
+                <div style="width: 144px; float: left;">No. HP</div>
                 <div>: {{ $result->phone }}</div>
             </div>
             <div style="display: flex; margin: 16px 0;">
-                <div style="width: 144px;">Jenis Kelamin</div>
+                <div style="width: 144px; float: left;">Usia</div>
+                <div>: {{ $result->age }} Tahun</div>
+            </div>
+            <div style="display: flex; margin: 16px 0;">
+                <div style="width: 144px; float: left;">Jenis Kelamin</div>
                 <div>: {{ $result->gender == 'male' ? 'Laki-laki' : 'Perempuan' }}</div>
             </div>
             <div>

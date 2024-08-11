@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HasilPemeriksaan;
-use App\Models\JenisPemeriksaan;
+use Carbon\Carbon;
 use App\Models\Pemeriksaan;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\HasilPemeriksaan;
+use App\Models\JenisPemeriksaan;
 use Illuminate\Support\Facades\Auth;
 
 class RiwayatUController extends Controller
@@ -37,10 +39,19 @@ class RiwayatUController extends Controller
         $result = Pemeriksaan::join('users', 'pemeriksaans.user_id', '=', 'users.id')
             ->where('pemeriksaans.id', '=', $id)->first();
 
+        $result->age = Carbon::parse($result->birth)->age;
+
         $hasil = JenisPemeriksaan::join('hasil_pemeriksaans', 'jenis_pemeriksaans.id', '=', 'hasil_pemeriksaans.jenis_id')
             ->join('pemeriksaans', 'hasil_pemeriksaans.pemeriksaan_id', '=', 'pemeriksaans.id')
             ->where('pemeriksaans.id', '=', $id)
             ->get();
+
+        $pdf = Pdf::loadView('user.pdf.hasil_medical', [
+            'result' => $result,
+            'hasil' => $hasil
+        ]);
+
+        // return $pdf->download('Hasil MCU.pdf');
 
         return view('user.pdf.hasil_medical', [
             'result' => $result,

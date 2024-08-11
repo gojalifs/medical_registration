@@ -36,6 +36,7 @@ Route::middleware('authenticate')->group(function () {
 
 
         Route::get('/data-pasien', [DataRegistrasiController::class, 'index'])->name('admin.pasien');
+        Route::post('/data-pasien', [DataRegistrasiController::class, 'update'])->name('admin.set_analyst');
     });
 
     Route::middleware('analyst')->group(function () {
