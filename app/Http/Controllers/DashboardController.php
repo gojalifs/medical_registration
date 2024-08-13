@@ -45,10 +45,13 @@ class DashboardController extends Controller
 
     public function analystDashboard(): View
     {
-        $semua = Pemeriksaan::where('selesai', '=', 0)->count();
+        $semua = Pemeriksaan::where('analyst_id', '=', Auth::user()->id)
+            ->where('selesai', '=', 0)->count();
+            
         $today = Carbon::now();
         // dd();
-        $pemeriksaanTerbaru = Pemeriksaan::where('tanggal', '=', $today->format('Y-m-d'))
+        $pemeriksaanTerbaru = Pemeriksaan::where('analyst_id', '=', Auth::user()->id)
+            ->where('tanggal', '=', $today->format('Y-m-d'))
             ->count();
 
         return view('analyst.dashboard', [

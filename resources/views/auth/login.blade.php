@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="flex flex-col items-center justify-center h-screen">
-        <div class="sm:w-[600px] mx-auto border rounded-md px-8 py-3 bg-white space-y-4 shadow-sm">
+        <img src="/login-bg.jpeg" alt="" class="w-screen h-screen absolute top-0 -z-10 blur-md">
+        <div class="sm:w-[600px] mx-auto border rounded-md px-8 py-3 bg-white space-y-4 shadow-lg">
             <div class="text-center text-xl">
                 Login
             </div>

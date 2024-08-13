@@ -22,7 +22,7 @@ class PemeriksaanController extends Controller
             ->join('users', 'pemeriksaans.id', '=', 'users.id')
             ->get();
 
-            // dd($selesai);
+        // dd($selesai);
 
         return view('analyst.riwayat', [
             'sidebar' => $this->menu,
@@ -56,11 +56,13 @@ class PemeriksaanController extends Controller
             $hasil->pemeriksaan_id = $request->id;
             $hasil->analyst_id = Auth::user()->id;
             $hasil->hasil = $request->input("jenis{$key}");
+            $hasil->jenis_id = $request->input("jenis_id");
             $hasil->keterangan = 'OK';
             $hasil->save();
         }
 
         $pemeriksaan = Pemeriksaan::find($request->id);
+        dd($request->id);
         $pemeriksaan->selesai = 1;
         $pemeriksaan->save();
 

@@ -31,6 +31,7 @@
                                 <input type="hidden" name="id" id="id" value="{{ $p->pemeriksaan_id }}">
                                 <select name="pemeriksa" id="pemeriksa{{ $p->id }}" onchange="this.form.submit()"
                                     class="border-none px-4">
+                                    <option value="null" onclick="null">Belum Dipilih</option>
                                     @foreach ($analyst as $a)
                                         <option value="{{ $a->id }}"
                                             {{ $p->analyst_id == $a->id ? 'selected' : '' }}>{{ $a->name }}</option>

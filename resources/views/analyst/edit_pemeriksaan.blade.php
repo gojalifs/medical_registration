@@ -15,9 +15,10 @@
                 <div class="text-left text-gray-600">Pemeriksaan</div>
                 <div class="col-span-2 grid grid-cols-2 px-8  items-center">
                     @foreach ($periksa as $k => $p)
-                        <div class="text-left text-gray-600">{{ $k }} {{ $p->nama_pemeriksaan }} </div>
+                        <input type="hidden" name="jenis_id" id="jenis_id" value="{{ $p->id }}">
+                        <div class="text-left text-gray-600">{{ $p->nama_pemeriksaan }} </div>
                         <input type="text" name="jenis{{ $k }}" id="jenis" class="my-3"
-                            placeholder="Masukkan hasil dan satuannya" required>
+                            placeholder="Masukkan hasil dan satuannya" required {{ $k == 0 ? 'autofocus' : '' }}>
                     @endforeach
                 </div>
             </div>

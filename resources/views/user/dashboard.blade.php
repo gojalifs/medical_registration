@@ -12,6 +12,7 @@
         <hr>
         <div class="text-left">
             <div class="text-left text-xl mb-6">Riwayat Medical Checkup Terbaru Anda:</div>
+            @if (isset($terbaru))
             <div class="max-w-lg space-y-4 pl-4 text-slate-800">
                 <div class="flex justify-between">
                     <div>Nama</div>
@@ -19,7 +20,7 @@
                 </div>
                 <div class="flex justify-between">
                     <div>Tanggal</div>
-                    <div>{{ $terbaru->tanggal }}</div>
+                    <div>{{ $terbaru->tanggal ?: '' }}</div>
                 </div>
                 <div class="flex justify-between">
                     <div>Dokter Pemeriksa</div>
@@ -29,7 +30,10 @@
                     <div>Status</div>
                     <div>{{ $terbaru->selesai ? 'Sudah Selesai' : 'Belum Selesai' }}</div>
                 </div>
-            </div>
+            </div>                
+            @else
+                <div>Tidak ada data</div>
+            @endif
         </div>
     </div>
 @endsection

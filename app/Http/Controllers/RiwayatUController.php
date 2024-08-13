@@ -14,15 +14,21 @@ class RiwayatUController extends Controller
 {
     public function index()
     {
-        $pemeriksaan = Pemeriksaan::where('user_id', '=', Auth::user()->id)
-            ->join('users', 'pemeriksaans.id', '=', 'users.id')
+        $pemeriksaan = Pemeriksaan::join('users', 'pemeriksaans.user_id', '=', 'users.id')
+            ->where('user_id', '=', Auth::user()->id)
             ->where('selesai', '=', 0)
             ->orderByDesc('pemeriksaans.created_at')
             ->orderByDesc('pemeriksaans.status')
             ->get();
 
+        // $pemeriksaan = JenisPemeriksaan::join('hasil_pemeriksaans', 'jenis_pemeriksaans.id', '=', 'hasil_pemeriksaans.jenis_id')
+        //     ->join('pemeriksaans', 'hasil_pemeriksaans.pemeriksaan_id', '=', 'pemeriksaans.id')
+        //     ->where('pemeriksaans.user_id', '=', Auth::user()->id)
+        //     ->get();
+
+        // dd(json_decode($pemeriksaan));
         $selesai = Pemeriksaan::where('user_id', '=', Auth::user()->id)
-            ->join('users', 'pemeriksaans.id', '=', 'users.id')
+            ->join('users', 'pemeriksaans.user_id', '=', 'users.id')
             ->where('selesai', '=', 1)
             ->orderByDesc('pemeriksaans.created_at')
             ->get();
