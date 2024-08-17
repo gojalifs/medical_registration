@@ -21,7 +21,7 @@
                         <td class="border px-4 py-2">{{ $p->phone }}</td>
                         <td class="border px-4 py-2">{{ $p->selesai == 1 ? 'Sudah Selesai' : 'Belum Selesai' }}</td>
                         <td class="border px-4 py-2">
-                            <a href="{{ route('input_hasil', ['id' => $p->id]) }}"
+                            <a href="{{ route('input_hasil', ['id' => $p->pemeriksaan_id]) }}"
                                 class="bg-green-400 hover:bg-green-500 hover:text-white px-4 py-2">Input Hasil
                                 Pemeriksaan</a>
                         </td>

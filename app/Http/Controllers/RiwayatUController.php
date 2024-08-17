@@ -31,6 +31,7 @@ class RiwayatUController extends Controller
             ->join('users', 'pemeriksaans.user_id', '=', 'users.id')
             ->where('selesai', '=', 1)
             ->orderByDesc('pemeriksaans.created_at')
+            ->select(['*', 'pemeriksaans.id as periksa_id'])
             ->get();
 
         return view('user.riwayat', [
@@ -57,11 +58,7 @@ class RiwayatUController extends Controller
             'hasil' => $hasil
         ]);
 
-        // return $pdf->download('Hasil MCU.pdf');
+        return $pdf->download("Hasil MCU_{$result->name}_{$result->tanggal}.pdf");
 
-        return view('user.pdf.hasil_medical', [
-            'result' => $result,
-            'hasil' => $hasil
-        ]);
     }
 }

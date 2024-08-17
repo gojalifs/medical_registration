@@ -42,6 +42,7 @@ class DataRegistrasiController extends Controller
         $analyst = $request->pemeriksa;
         $registrasi = Pemeriksaan::find($request->id);
         $registrasi->analyst_id = $analyst;
+        $registrasi->status = 'DIPERIKSA';
         $registrasi->save();
 
         return redirect()->back()->with('success', 'Sukses mengubah petugas analis.');

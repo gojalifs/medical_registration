@@ -17,6 +17,16 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/registrasi', [AuthController::class, 'showRegis'])->name('regis.index');
 Route::post('/registrasi', [AuthController::class, 'store'])->name('regis.store');
 
+Route::get('/forgot', function () {
+    return view('auth.forgot-password');
+})->name('forgot');
+Route::post('/send_reset', [AuthController::class, 'reset'])->name('send_reset_link');
+
+Route::get('/reset-password/{token}', function (string $token) {
+    return view('auth.reset', ['token' => $token]);
+})->name('password.reset');
+Route::post('/reset-password', [AuthController::class, 'resetPwd'])->name('reset.now');
+
 Route::middleware('authenticate')->group(function () {
 
     /// Middleware untuk admin

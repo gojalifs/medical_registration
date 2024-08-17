@@ -14,12 +14,16 @@ class PemeriksaanController extends Controller
     public function indexAnalyst()
     {
         $hasilPemeriksaan = HasilPemeriksaan::where('analyst_id', '=', Auth::user()->id)->get();
-        $pemeriksaan = Pemeriksaan::where('selesai', '=', 0)
-            ->join('users', 'pemeriksaans.id', '=', 'users.id')
+        $pemeriksaan = Pemeriksaan::join('users', 'pemeriksaans.user_id', '=', 'users.id')
+            ->where('selesai', '=', 0)
+            ->where('analyst_id', '=', Auth::user()->id)
+            ->select(['*', 'pemeriksaans.id as pemeriksaan_id'])
             ->get();
 
-        $selesai = Pemeriksaan::where('selesai', '=', 1)
-            ->join('users', 'pemeriksaans.id', '=', 'users.id')
+        $selesai = Pemeriksaan::join('users', 'pemeriksaans.user_id', '=', 'users.id')
+            ->where('selesai', '=', 1)
+            ->where('analyst_id', '=', Auth::user()->id)
+            ->select(['*', 'pemeriksaans.id as pemeriksaan_id'])
             ->get();
 
         // dd($selesai);
@@ -36,6 +40,7 @@ class PemeriksaanController extends Controller
     {
         $pemeriksaan = Pemeriksaan::join('users', 'pemeriksaans.user_id', '=', 'users.id')
             ->select(['*', 'pemeriksaans.id as periksa_id'])
+            ->where('pemeriksaans.id', '=', $id)
             ->first();
 
         $periksa = JenisPemeriksaan::all();
@@ -56,14 +61,14 @@ class PemeriksaanController extends Controller
             $hasil->pemeriksaan_id = $request->id;
             $hasil->analyst_id = Auth::user()->id;
             $hasil->hasil = $request->input("jenis{$key}");
-            $hasil->jenis_id = $request->input("jenis_id");
+            $hasil->jenis_id = $request->input("jenis_id{$key}");
             $hasil->keterangan = 'OK';
             $hasil->save();
         }
 
         $pemeriksaan = Pemeriksaan::find($request->id);
-        dd($request->id);
         $pemeriksaan->selesai = 1;
+        $pemeriksaan->status = 'SELESAI';
         $pemeriksaan->save();
 
         return redirect()->route('analyst.pemeriksaan')->with('success', 'Berhasil menyimpan data');

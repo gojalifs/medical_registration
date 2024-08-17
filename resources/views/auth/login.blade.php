@@ -10,11 +10,11 @@
             <div>
                 <form action="{{ route('login.do') }}" method="post" class="space-y-4">
                     @if (Session::get('success'))
-                        {
+                        
                         <div class="text-green-400">
                             {{ Session::get('success') }}
                         </div>
-                        }
+                        
                     @endif
                     @if ($errors->any())
                         <div class="text-red-400">
@@ -37,7 +37,7 @@
                             class="w-full" required>
                     </div>
                     <div class="text-right">
-                        <a href="" class="text-blue-600 hover:text-blue-500">Lupa kata sandi?</a>
+                        <a href="{{route('forgot')}}" class="text-blue-600 hover:text-blue-500">Lupa kata sandi?</a>
                     </div>
                     <button type="submit" class="bg-blue-400 px-2 py-1 hover:bg-blue-500">Login</button>
                     <div>
