@@ -35,9 +35,17 @@ Route::middleware('authenticate')->group(function () {
         Route::get('/dashboard-admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
 
         Route::get('/jenis-pemeriksaan', [JenisPemeriksaanController::class, 'index'])->name('admin.jenis');
+        Route::get('/jenis-pemeriksaan-index', [JenisPemeriksaanController::class, 'indexData'])->name('admin.jenis.data');
+        Route::get('/detail_jenis-pemeriksaan/{id}', [JenisPemeriksaanController::class, 'detailjenisPemeriksaan'])->name('admin.jenis.detail');
         Route::post('/jenis-pemeriksaan', [JenisPemeriksaanController::class, 'store'])->name('admin.jenis.save');
+        Route::post('add_sub_jenis_pemeriksaan', [JenisPemeriksaanController::class, 'addSubTest'])->name('admin.jenis.addSubTes');
+        Route::post('add_sub_jenis_pemeriksaan2', [JenisPemeriksaanController::class, 'addSubTest2'])->name('admin.jenis.addSubTes2');
         Route::post('/jenis-pemeriksaan/update', [JenisPemeriksaanController::class, 'update'])->name('admin.jenis.update');
+        Route::post('/jenis-pemeriksaan/update_sub', [JenisPemeriksaanController::class, 'update_sub'])->name('admin.jenis.sub.update');
+        Route::post('/jenis-pemeriksaan/update_sub2', [JenisPemeriksaanController::class, 'update_sub2'])->name('admin.jenis.sub2.update');
         Route::post('/jenis-pemeriksaan/delete', [JenisPemeriksaanController::class, 'destroy'])->name('admin.jenis.delete');
+        Route::post('/jenis-pemeriksaan/sub_delete', [JenisPemeriksaanController::class, 'destroy_sub'])->name('admin.jenis.sub.delete');
+        Route::post('/jenis-pemeriksaan/sub2_delete', [JenisPemeriksaanController::class, 'destroy_sub2'])->name('admin.jenis.sub2.delete');
 
         Route::get('/data-analis', [AnalisController::class, 'index'])->name('admin.analis');
         Route::post('/data-analis', [AnalisController::class, 'store'])->name('admin.analis.save');
