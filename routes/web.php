@@ -30,6 +30,9 @@ Route::post('/reset-password', [AuthController::class, 'resetPwd'])->name('reset
 
 Route::middleware('authenticate')->group(function () {
 
+    /// Banner Promo
+    Route::get('/banner', [BannerController::class, 'data'])->name('admin.banner.data');
+
     /// Middleware untuk admin
     Route::middleware('admin')->group(function () {
         Route::get('/', [DashboardController::class, 'adminDashboard'])->name('dashboard');
@@ -57,7 +60,6 @@ Route::middleware('authenticate')->group(function () {
         Route::post('/data-pasien', [DataRegistrasiController::class, 'update'])->name('admin.set_analyst');
 
         Route::get('/banners', [BannerController::class, 'index'])->name('admin.banner');
-        Route::get('/banner', [BannerController::class, 'data'])->name('admin.banner.data');
         Route::post('/banner', [BannerController::class, 'store'])->name('admin.banner.store');
         Route::post('/banner/delete', [BannerController::class, 'destroy'])->name('admin.banner.destroy');
     });
