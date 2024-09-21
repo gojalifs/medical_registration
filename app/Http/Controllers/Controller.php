@@ -40,6 +40,11 @@ abstract class Controller
                     'route' => route('admin.pasien'),
                     'icon' => '/svg/note.svg'
                 ],
+                (object)[
+                    'title' => 'Banner & Promo',
+                    'route' => route('admin.banner'),
+                    'icon' => '/svg/banner.svg'
+                ]
             ];
         } else if (Auth::user()->role == 'ANALYST') {
             $this->menu = (object) [

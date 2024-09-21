@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\PemeriksaanController;
 use App\Http\Controllers\RegistrasiMCUController;
 use App\Http\Controllers\RiwayatUController;
@@ -52,9 +53,13 @@ Route::middleware('authenticate')->group(function () {
         Route::post('/data-analis/update', [AnalisController::class, 'update'])->name('admin.analis.update');
         Route::post('/data-analis/{id}', [AnalisController::class, 'destroy'])->name('admin.analis.delete');
 
-
         Route::get('/data-pasien', [DataRegistrasiController::class, 'index'])->name('admin.pasien');
         Route::post('/data-pasien', [DataRegistrasiController::class, 'update'])->name('admin.set_analyst');
+
+        Route::get('/banners', [BannerController::class, 'index'])->name('admin.banner');
+        Route::get('/banner', [BannerController::class, 'data'])->name('admin.banner.data');
+        Route::post('/banner', [BannerController::class, 'store'])->name('admin.banner.store');
+        Route::post('/banner/delete', [BannerController::class, 'destroy'])->name('admin.banner.destroy');
     });
 
     Route::middleware('analyst')->group(function () {
