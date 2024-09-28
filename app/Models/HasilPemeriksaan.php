@@ -13,6 +13,8 @@ class HasilPemeriksaan extends Model
         'pemeriksaan_id',
         'analyst_id',
         'hasil',
-        'keterangan'
+        'keterangan',
+        'sub_jenis_id',
+        'sub_2_jenis_id',
     ];
 }

@@ -32,6 +32,7 @@ Route::middleware('authenticate')->group(function () {
 
     /// Banner Promo
     Route::get('/banner', [BannerController::class, 'data'])->name('admin.banner.data');
+    Route::get('/jenis-pemeriksaan-index', [JenisPemeriksaanController::class, 'indexData'])->name('admin.jenis.data');
 
     /// Middleware untuk admin
     Route::middleware('admin')->group(function () {
@@ -39,7 +40,6 @@ Route::middleware('authenticate')->group(function () {
         Route::get('/dashboard-admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
 
         Route::get('/jenis-pemeriksaan', [JenisPemeriksaanController::class, 'index'])->name('admin.jenis');
-        Route::get('/jenis-pemeriksaan-index', [JenisPemeriksaanController::class, 'indexData'])->name('admin.jenis.data');
         Route::get('/detail_jenis-pemeriksaan/{id}', [JenisPemeriksaanController::class, 'detailjenisPemeriksaan'])->name('admin.jenis.detail');
         Route::post('/jenis-pemeriksaan', [JenisPemeriksaanController::class, 'store'])->name('admin.jenis.save');
         Route::post('add_sub_jenis_pemeriksaan', [JenisPemeriksaanController::class, 'addSubTest'])->name('admin.jenis.addSubTes');
@@ -68,8 +68,8 @@ Route::middleware('authenticate')->group(function () {
         Route::get('/dashboard-analis', [DashboardController::class, 'analystDashboard'])->name('analyst.dashboard');
         Route::get('/pemeriksaan', [PemeriksaanController::class, 'indexAnalyst'])->name('analyst.pemeriksaan');
         Route::get('/pemeriksaan/{id}', [PemeriksaanController::class, 'showEdit'])->name('input_hasil');
+        Route::get('/pemeriksaan_data_edit', [PemeriksaanController::class, 'dataEdit']);
         Route::post('/pemeriksaan', [PemeriksaanController::class, 'saveHasil'])->name('analyst.pemeriksaan.save');
-
     });
 
     Route::middleware('user')->group(function () {
@@ -78,6 +78,5 @@ Route::middleware('authenticate')->group(function () {
         Route::post('/pedaftaran', [RegistrasiMCUController::class, 'store'])->name('user.regis.store');
         Route::get('/riwayat', [RiwayatUController::class, 'index'])->name('user.pemeriksaan');
         Route::get('/generate_pdf/{id}', [RiwayatUController::class, 'pdf'])->name('generate_pdf');
-
     });
 });
