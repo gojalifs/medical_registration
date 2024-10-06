@@ -6,6 +6,7 @@ use App\Models\JenisPemeriksaan;
 use App\Models\Sub2JenisPemeriksaan;
 use App\Models\SubJenisPemeriksaan;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -33,7 +34,7 @@ class JenisPemeriksaanController extends Controller
 
         // return json_encode($jenis);
 
-        return view('admin.jenis_pemeriksaan', [
+        return view('admin.jenis-pemeriksaan', [
             'sidebar' => $this->menu,
             'data' => $jenis,
             'success' => Session::get('success'),
@@ -63,12 +64,18 @@ class JenisPemeriksaanController extends Controller
     public function detailJenisPemeriksaan($pemeriksaanId)
     // : View
     {
-        $jenis = JenisPemeriksaan::join('sub_jenis_pemeriksaans', 'jenis_pemeriksaans.id', '=', 'sub_jenis_pemeriksaans.jenis_pemeriksaan_id')
-            ->get();
-        // return json_encode($jenis);
+        $jenis = JenisPemeriksaan::with([
+            'subJenisPemeriksaan' => function ($query) {
+                $query->with('sub2JenisPemeriksaan');
+            }
+        ])
+            ->where('jenis_pemeriksaans.id', '=', $pemeriksaanId)
+            ->first();
+        // return response()->json($jenis);
+        // dd(json_decode($jenis, true));
         return view('admin.edit_jenis_pemeriksaan', [
             'sidebar' => $this->menu,
-            'data' => $jenis
+            'data' => json_decode($jenis, )
         ]);
     }
 
@@ -89,65 +96,57 @@ class JenisPemeriksaanController extends Controller
         }
     }
 
-    public function addSubTest(Request $request): JsonResponse
+    public function addSubTest(Request $request): RedirectResponse
     {
         try {
             $subtest = new SubJenisPemeriksaan();
 
-            $req = $request->json()->all();
-
-            $subtest->jenis_pemeriksaan_id = $req['jenis_pemeriksaan_id'];
-            $subtest->name = $req['name'];
+            $subtest->jenis_pemeriksaan_id = $request->id;
+            $subtest->name = $request->name;
 
             $subtest->save();
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Sukses menambah subtes pemeriksaan',
-                'data' => $subtest
-            ], 201);
-
+            
+            return redirect()->back()->with('success', 'Data berhasil disimpan!');
+            
         } catch (Exception $e) {
-            return response()->json([
-                'success' => false,
-                'error_code' => $e->getCode(),
-                'message' => 'Terjadi kesalahan. Gagal menyimpan, silahkan ulangi.'
-            ], 500);
-
+            Log::error($e->getMessage());
+            return redirect()->back()->withErrors(['message'=> 'Data gagal disimpan!']);
         }
     }
 
-    public function addSubTest2(Request $request): JsonResponse
+    public function addSubTest2(Request $request): RedirectResponse
     {
         try {
             $subtest = new Sub2JenisPemeriksaan();
 
-            $req = $request->json()->all();
-
-            $subtest->sub_jenis_pemeriksaan_id = $req['jenis_pemeriksaan_id'];
-            $subtest->name = $req['name'];
+            $subtest->sub_jenis_pemeriksaan_id = $request->id;
+            $subtest->name = $request->nama_pemeriksaan;
 
             $subtest->save();
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Sukses menambah subtes pemeriksaan',
-                'data' => $subtest,
-            ], 201);
+            return redirect()->back()->with('success', 'Data berhasil disimpan!');
+
+            // return response()->json([
+            //     'success' => true,
+            //     'message' => 'Sukses menambah subtes pemeriksaan',
+            //     'data' => $subtest,
+            // ], 201);
         } catch (Exception $e) {
             Log::debug($e->getMessage());
-            return response()->json([
-                'success' => false,
-                'error_code' => $e->getCode(),
-                'message' => 'Terjadi kesalahan. Gagal menyimpan, silahkan ulangi.'
-            ], 500);
+            return redirect()->back()->withErrors(['message'=> 'Data gagal disimpan!']);
+
+            // return response()->json([
+            //     'success' => false,
+            //     'error_code' => $e->getCode(),
+            //     'message' => 'Terjadi kesalahan. Gagal menyimpan, silahkan ulangi.'
+            // ], 500);
         }
     }
 
     public function update(Request $request): RedirectResponse
     {
         $jenisPemeriksaan = JenisPemeriksaan::find($request->id);
-        $jenisPemeriksaan->nama_pemeriksaan = $request->name;
+        $jenisPemeriksaan->nama_pemeriksaan = $request->nama_pemeriksaan;
         $jenisPemeriksaan->ruang = $request->room;
 
         $jenisPemeriksaan->save();
@@ -158,7 +157,7 @@ class JenisPemeriksaanController extends Controller
     public function update_sub(Request $request): RedirectResponse
     {
         try {
-            $jenisPemeriksaan = SubJenisPemeriksaan::find($request->id);
+            $jenisPemeriksaan = SubJenisPemeriksaan::findOrFail($request->id);
             $jenisPemeriksaan->jenis_pemeriksaan_id = $request->jenis_id;
             $jenisPemeriksaan->name = $request->name;
 
@@ -203,7 +202,7 @@ class JenisPemeriksaanController extends Controller
             if (str_contains('1451', $e->getMessage())) {
                 return redirect()->back()->withErrors(['message' => 'Gagal menghapus, silahkan ulangi. Code: ' . $e->getCode()]);
             }
-                return redirect()->back()->withErrors(['message' => 'Terjadi kesalahan. Data tes memiliki sub tes! Hapus semua subtes terlebih dahulu!']);
+            return redirect()->back()->withErrors(['message' => 'Terjadi kesalahan. Data tes memiliki sub tes! Hapus semua subtes terlebih dahulu!']);
         }
     }
 
@@ -220,8 +219,8 @@ class JenisPemeriksaanController extends Controller
 
         } catch (Exception $e) {
             Log::debug($e->getMessage());
-            if (str_contains('1451', $e->getMessage())) {
-                return redirect()->back()->withErrors(['message' => 'Gagal menghapus! Anda harus menghapus sub-sub terlebih dahulu!']);
+            if ($e instanceof QueryException) {
+                return redirect()->back()->withErrors(['message' => 'Gagal menghapus! Anda harus menghapus sub-sub terlebih dahulu dan pastikan sub tes ini belum pernah digunakan! Silahkan Ubah Nama']);
             }
             return redirect()->back()->withErrors(['message' => 'Terjadi kesalahan. Gagal menghapus, silahkan ulangi. Code: ' . $e->getCode()]);
         }

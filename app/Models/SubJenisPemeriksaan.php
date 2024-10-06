@@ -17,4 +17,9 @@ class SubJenisPemeriksaan extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function sub2JenisPemeriksaan()
+    {
+        return $this->hasMany(Sub2JenisPemeriksaan::class);
+    }
 }

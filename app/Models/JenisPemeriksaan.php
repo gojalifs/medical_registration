@@ -13,4 +13,14 @@ class JenisPemeriksaan extends Model
         'nama_pemeriksaan',
         'ruang',
     ];
+
+    public function pemeriksaan()
+    {
+        return $this->hasManyThrough(Sub2JenisPemeriksaan::class, SubJenisPemeriksaan::class);
+    }
+
+    public function subJenisPemeriksaan()
+    {
+        return $this->hasMany(SubJenisPemeriksaan::class);
+    }
 }
