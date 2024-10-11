@@ -50,8 +50,10 @@
                 <div class="bg-white p-4 rounded-md shadow mt-4">
                     @yield('dash-content')
                 </div>
+                <div class="my-4">
+                    @include('layout.footer')
+                </div>
             </div>
-            @include('layout.footer')
         </div>
     </div>
 @endsection

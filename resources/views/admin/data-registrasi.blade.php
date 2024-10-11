@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('dash-content')
-    <div>
-        <div>Data Registrasi</div>
+    <div>Data Registrasi</div>
+    <div class="w-full overflow-auto">
         <table class="table-auto mt-8">
             <thead>
                 <th class="border px-8 py-1">No.</th>

@@ -107,7 +107,7 @@ class PemeriksaanController extends Controller
         DB::transaction(function () use (&$body, $request) {
             $analystId = Auth::user()->id;
 
-            Log::info($body);
+            // dd($body);
             foreach ($body['data'] as $key => $value) {
                 // Log::info($value);
                 // if (isset($value['data'])) {
@@ -118,6 +118,7 @@ class PemeriksaanController extends Controller
                     $hasil->pemeriksaan_id = $body['id'];
                     $hasil->hasil = $value['hasil'];
                     $hasil->analyst_id = $analystId;
+                    $hasil->jenis_id = $value['id'];
                     $hasil->save();
                 }
                 // dd($value);

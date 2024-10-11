@@ -36,18 +36,19 @@
 <body>
     <div>
         <div>
-            <img src="{{ public_path('/clinic.png') }}" alt=""
+            <img src="{{asset('/klinik_logo.webp')}}" alt=""
                 style="float: left; margin-right: 16px; height: 100px; width: auto;">
             <div style="height: 100px; align-items: center">
                 <div style="font-size: 24px; line-height: 32px; font-weight: 500; width: auto;">
-                    Medical Checkup Clinic
+                    Klinik Kenanga
                 </div>
                 <div style="font-size: 18px; line-height: 28px; height: 24px;">
                     {{-- Tiara Vita, S.H., M.Kn. --}}
                 </div>
-                <div style="margin-bottom: 8px">Jl. Raya kalimalang No. 01, Cibatu, Cikarang Pusat, Bekasi, Jawa Barat
+                <div style="margin-bottom: 8px">Jl. Tegal Gede No.77, Pasirsari, Cikarang Selatan, kabupaten Bekasi, Jawa
+                    Barat 17530
                 </div>
-                <div>HP : 081297462058</div>
+                <div>Telp : (021) 8935937</div>
             </div>
         </div>
         <hr style="background-color: black; height: 0.25rem; margin-top: 1rem; margin-bottom: 1rem;">
@@ -87,12 +88,12 @@
                 <th>Keterangan</th>
             </thead>
             <tbody>
-                @foreach ($hasil as $key => $p)
+                @foreach ($data as $key => $p)
                     <tr>
                         <td>{{ $key + 1 }}</td>
-                        <td>{{ $p->nama_pemeriksaan }} </td>
-                        <td>{{ $p->hasil }}</td>
-                        <td>{{ $p->keterangan }}</td>
+                        <td>{{ $p['name'] }} </td>
+                        <td>{{ $p['hasil'] }}</td>
+                        <td>{{ $p['keterangan'] ?: '-' }}</td>
                     </tr>
                 @endforeach
             </tbody>
