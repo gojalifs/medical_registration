@@ -21,6 +21,7 @@
                     <img src="/svg/illustration.svg" alt="" class="size-12 sm:size-24 mx-auto">
                 </div>
                 <div class="text-center uppercase text-2xl">{{ $pageTitle ?? 'Medical Checkup' }}</div>
+                <div class="text-center text-xs my-3">Selamat datang, <span class="text-teal-700"> {{ Auth::user()->name }} </span></div>
                 <hr class="my-6">
                 <ul class="space-y-2 font-medium">
                     @foreach ($sidebar as $m)
