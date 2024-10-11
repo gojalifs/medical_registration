@@ -40,7 +40,7 @@
                 style="float: left; margin-right: 16px; height: 100px; width: auto;">
             <div style="height: 100px; align-items: center">
                 <div style="font-size: 24px; line-height: 32px; font-weight: 500; width: auto;">
-                    Klinik Kenanga
+                    Klinik dan Rumah Bersalin Kenanga
                 </div>
                 <div style="font-size: 18px; line-height: 28px; height: 24px;">
                     {{-- Tiara Vita, S.H., M.Kn. --}}
