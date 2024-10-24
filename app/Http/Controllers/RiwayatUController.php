@@ -140,8 +140,34 @@ class RiwayatUController extends Controller
             ->where('jenis_pemeriksaans.id', '=', 5)
             ->get();
 
-        // $hasil = HasilPemeriksaan::where('pemeriksaan_id', '=', $id)->get();
-        // $image = base64_encode(file_get_contents(URL::asset('clinic.png')));
+        $hasil = HasilPemeriksaan::where('pemeriksaan_id', '=', $id)
+            ->get();
+
+        $data = [
+            'id' => 0,
+            'hasil' => 'ok',
+            'name' => 'name',
+            'sub' => [
+                'id' => 0,
+                'hasil' => 'ok',
+                'name' => 'name',
+                'sub2' => [
+                    'id' => 0,
+                    'hasil' => 'ok',
+                    'name' => 'name'
+                ]
+            ]
+        ];
+
+        $data = [];
+        foreach ($hasil as $key => $value) {
+            if (!isset($value->sub_jenis_id) && !isset($value->sub_2_jenis_id)) {
+                array_push($data, [
+                    'id' => $value->id,
+                ]);
+            }
+        }
+
         $pdf = Pdf::loadView('user.pdf.hasil_medical', [
             // 'image' => $image,
             'data' => $data,
@@ -160,6 +186,16 @@ class RiwayatUController extends Controller
         //     'result' => $result,
         //     'hasil' => $hasil
         // ]);
+        
+        return response()->json([
+            'result' => $result,
+            'hasil' => $hasil
+        ]);
+
+        return view('user.pdf.hasil_medical', [
+            'result' => $result,
+            'hasil' => $hasil
+        ]);
 
         return $pdf->download("Hasil MCU_{$result->name}_{$result->tanggal}.pdf");
     }

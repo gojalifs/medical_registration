@@ -14,8 +14,14 @@ class BannerController extends Controller
 {
     public function index()
     {
+        $data = BannerPromo::where('deleted_at', '=', null)->get();
+        foreach ($data as $value) {
+            $value->path = Storage::url($value['path']);
+        }
+        
         return view('admin.promo')->with([
-            'sidebar' => $this->menu,
+            'banners'   => $data,
+            'sidebar'   => $this->menu,
         ]);
     }
 

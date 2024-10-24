@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BannerPromo;
 use App\Models\Pemeriksaan;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
@@ -37,9 +39,15 @@ class DashboardController extends Controller
             ->join('users', 'analyst_id', '=', 'users.id')
             ->first();
 
+        $data = BannerPromo::where('deleted_at', '=', null)->get();
+        foreach ($data as $value) {
+            $value->path = Storage::url($value['path']);
+        }
+
         return view('user.dashboard', [
             'sidebar' => $this->menu,
-            'terbaru' => $pemeriksaanTerbaru
+            'terbaru' => $pemeriksaanTerbaru,
+            'banners' => $data
         ]);
     }
 
@@ -47,7 +55,7 @@ class DashboardController extends Controller
     {
         $semua = Pemeriksaan::where('analyst_id', '=', Auth::user()->id)
             ->where('selesai', '=', 0)->count();
-            
+
         $today = Carbon::now();
         // dd();
         $pemeriksaanTerbaru = Pemeriksaan::where('analyst_id', '=', Auth::user()->id)
