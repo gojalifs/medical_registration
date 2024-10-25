@@ -140,8 +140,21 @@ class RiwayatUController extends Controller
             ->where('jenis_pemeriksaans.id', '=', 5)
             ->get();
 
-        $hasil = HasilPemeriksaan::where('pemeriksaan_id', '=', $id)
-            ->get();
+        $hasil = HasilPemeriksaan::where('pemeriksaan_id', '=', $id)->get();
+        foreach ($hasil as $key => $value) {
+            if(isset($value->jenis_id)){
+                $sub = JenisPemeriksaan::where('id', $value->jenis_id)->first();
+                $value->name = $sub->nama_pemeriksaan;
+            } 
+            if(isset($value->sub_jenis_id)){
+                $sub = SubJenisPemeriksaan::where('id', $value->sub_jenis_id)->first();
+                $value->name = $sub->name;
+            } 
+            if(isset($value->sub_2_jenis_id)){
+                $sub = Sub2JenisPemeriksaan::where('id', $value->sub_2_jenis_id)->first();
+                $value->name = $sub->name;
+            } 
+        }
 
         $data = [
             'id' => 0,
@@ -187,15 +200,15 @@ class RiwayatUController extends Controller
         //     'hasil' => $hasil
         // ]);
         
-        return response()->json([
-            'result' => $result,
-            'hasil' => $hasil
-        ]);
+        // return response()->json([
+        //     'result' => $result,
+        //     'hasil' => $hasil
+        // ]);
 
-        return view('user.pdf.hasil_medical', [
-            'result' => $result,
-            'hasil' => $hasil
-        ]);
+        // return view('user.pdf.hasil_medical', [
+        //     'result' => $result,
+        //     'hasil' => $hasil
+        // ]);
 
         return $pdf->download("Hasil MCU_{$result->name}_{$result->tanggal}.pdf");
     }

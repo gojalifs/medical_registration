@@ -11,8 +11,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
-use Log;
 use Session;
 
 class JenisPemeriksaanController extends Controller
@@ -101,7 +101,7 @@ class JenisPemeriksaanController extends Controller
         try {
             $subtest = new SubJenisPemeriksaan();
 
-            $subtest->jenis_pemeriksaan_id = $request->id;
+            $subtest->jenis_pemeriksaan_id = $request->jenis_id;
             $subtest->name = $request->name;
 
             $subtest->save();

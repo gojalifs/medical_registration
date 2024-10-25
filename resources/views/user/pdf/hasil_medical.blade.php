@@ -88,7 +88,7 @@
                 <th>Keterangan</th>
             </thead>
             <tbody>
-                @foreach ($data as $key => $p)
+                @foreach ($hasil as $key => $p)
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $p['name'] }} </td>
