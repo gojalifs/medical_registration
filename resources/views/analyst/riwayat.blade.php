@@ -40,6 +40,7 @@
                 <th class="border px-4 py-2">Nama Pasien</th>
                 <th class="border px-4 py-2">Nomor Telp.</th>
                 <th class="border px-4 py-2">Status</th>
+                <th class="border px-4 py-2">Aksi</th>
             </thead>
             <tbody>
                 @foreach ($selesai as $key => $s)
@@ -48,7 +49,11 @@
                         <td class="border px-4 py-2">{{ $s->tanggal }}</td>
                         <td class="border px-4 py-2">{{ $s->name }}</td>
                         <td class="border px-4 py-2">{{ $s->phone }}</td>
-                        <td class="border px-4 py-2">{{ $s->selesai == 1 ? 'Sudah Selesai' : 'Belum Selesai' }}</td>                        
+                        <td class="border px-4 py-2">{{ $s->selesai == 1 ? 'Sudah Selesai' : 'Belum Selesai' }}</td>
+                        <td class="border px-4 py-2">
+                            <button class="mx-3 px-4 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-md">Edit</button>
+                            <button class="mx-3 px-4 py-1 bg-red-600 hover:bg-red-700 rounded-md">Hapus</button>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
