@@ -126,7 +126,6 @@
                     $('#submit').removeAttr('disabled');
                 }
                 const a = reader.readAsDataURL(input.files[0]); // convert to base64 string
-                console.log(a);
 
             }
         }
@@ -147,7 +146,6 @@
         fetch(url).then((result) => {
             if (result.status == 200) {
                 result.json().then((response) => {
-                    console.log(response);
                     response.data.map((b, index) => {
                         // const banner = `
                         // <div class="hidden duration-700 ease-in-out overflow-hidden" data-carousel-item>
@@ -186,7 +184,6 @@
                 }).catch((err) => {
 
                 });
-                console.log();
 
             }
         }).catch((err) => {

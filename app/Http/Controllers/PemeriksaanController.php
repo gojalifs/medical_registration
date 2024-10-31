@@ -67,17 +67,44 @@ class PemeriksaanController extends Controller
         ]);
     }
 
-    public function dataEdit(): JsonResponse
+    public function dataEdit($id): JsonResponse
     {
         try {
 
             $jenis = JenisPemeriksaan::all();
             // return json_encode($jenis);
             foreach ($jenis as $value) {
+                // dd($value->id);
+                $hasil = HasilPemeriksaan::where('pemeriksaan_id', $id)
+                    ->where('jenis_id', $value->id)
+                    ->select(['hasil', 'id as hasil_id'])
+                    ->first();
+
+                $value->result = $hasil != null ? $hasil->hasil : '';
+                $value->hasil_id = $hasil != null ? $hasil->hasil_id : '';
+
                 $subJenis = SubJenisPemeriksaan::where('jenis_pemeriksaan_id', '=', $value->id)->get();
                 foreach ($subJenis as $vs) {
                     // return json_encode($vs);
+                    $hasil = HasilPemeriksaan::where('pemeriksaan_id', $id)
+                        ->where('sub_jenis_id', $vs->id)
+                        ->select(['hasil', 'id as hasil_id'])
+                        ->first();
+                    // dd($hasil);
+                    $vs->result = $hasil != null ? $hasil->hasil : '';
+                    $vs->hasil_id = $hasil != null ? $hasil->hasil_id : '';
+
                     $sub2 = Sub2JenisPemeriksaan::where('sub_jenis_pemeriksaan_id', '=', $vs->id)->get();
+                    foreach ($sub2 as $vs2) {
+                        $hasil = HasilPemeriksaan::where('pemeriksaan_id', $id)
+                            ->where('sub_2_jenis_id', $vs2->id)
+                            ->select(['hasil', 'id as hasil_id'])
+                            ->first();
+
+                        $vs2->result = $hasil != null ? $hasil->hasil : '';
+                        $vs2->hasil_id = $hasil != null ? $hasil->hasil_id : '';
+                    }
+
                     $vs->sub2 = $sub2;
                 }
                 $value->sub_jenis = $subJenis;
@@ -107,14 +134,14 @@ class PemeriksaanController extends Controller
         DB::transaction(function () use (&$body, $request) {
             $analystId = Auth::user()->id;
 
-            // dd($body);
             foreach ($body['data'] as $key => $value) {
                 // Log::info($value);
                 // if (isset($value['data'])) {
                 /// set for parent pemerikskaan
                 if (isset($value['hasil'])) {
                     // dd($value['hasil']);
-                    $hasil = new HasilPemeriksaan();
+                    $hasil = HasilPemeriksaan::findOrNew($value['hasil_id']);
+                    // $hasil = new HasilPemeriksaan();
                     $hasil->pemeriksaan_id = $body['id'];
                     $hasil->hasil = $value['hasil'];
                     $hasil->analyst_id = $analystId;
@@ -127,7 +154,8 @@ class PemeriksaanController extends Controller
                     // dd($jenisData);
                     if (isset($jenisData['hasil'])) {
                         // dd($value['hasil']);
-                        $hasil = new HasilPemeriksaan();
+                        $hasil = HasilPemeriksaan::findOrNew($jenisData['hasil_id']);
+                        // $hasil = new HasilPemeriksaan();
                         $hasil->pemeriksaan_id = $body['id'];
                         $hasil->hasil = $jenisData['hasil'];
                         $hasil->analyst_id = $analystId;
@@ -138,11 +166,10 @@ class PemeriksaanController extends Controller
                         foreach ($jenisData['sub_jenis'] as $key => $subJenisData) {
                             if (isset($subJenisData['hasil'])) {
 
-                                $h = $subJenisData['hasil'];
-                                // dd($h);
-                                $hasil = new HasilPemeriksaan();
+                                $hasil = HasilPemeriksaan::findOrNew($subJenisData['hasil_id']);
+                                // $hasil = new HasilPemeriksaan();
                                 $hasil->pemeriksaan_id = $body['id'];
-                                $hasil->hasil = $h;
+                                $hasil->hasil = $subJenisData['hasil'];
                                 $hasil->analyst_id = $analystId;
                                 $hasil->sub_jenis_id = $jenisData['id'];
                                 $hasil->sub_2_jenis_id = $subJenisData['id'];
@@ -195,5 +222,19 @@ class PemeriksaanController extends Controller
         // $pemeriksaan->save();
 
         // return redirect()->route('analyst.pemeriksaan')->with('success', 'Berhasil menyimpan data');
+    }
+
+    public function destroy(Request $request)
+    {
+        // try {
+        DB::transaction(function () use ($request) {
+            $pemeriksaan = Pemeriksaan::findOrFail($request->id);
+            $pemeriksaan->delete();
+            HasilPemeriksaan::where('pemeriksaan_id', $pemeriksaan->id)->delete();
+        });
+        return redirect()->route('analyst.pemeriksaan')->with('success', 'Sukses menghapus data');
+        // } catch (\Throwable $th) {
+        //     return redirect()->back()->with('error', $th->getMessage());
+        // }
     }
 }

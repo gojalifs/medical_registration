@@ -86,7 +86,6 @@
         fetch('/banner').then((result) => {
             if (result.status == 200) {
                 result.json().then((response) => {
-                    console.log(response);
                     response.data.map((b, index) => {                        
                         const button = `
                         <button type="button" class="w-3 h-3 bg-teal-500 rounded-full" aria-current="true" aria-label="Slide ${index}"
@@ -117,8 +116,6 @@
                 }).catch((err) => {
 
                 });
-                console.log();
-
             }
         }).catch((err) => {
 

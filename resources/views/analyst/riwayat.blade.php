@@ -51,8 +51,16 @@
                         <td class="border px-4 py-2">{{ $s->phone }}</td>
                         <td class="border px-4 py-2">{{ $s->selesai == 1 ? 'Sudah Selesai' : 'Belum Selesai' }}</td>
                         <td class="border px-4 py-2">
-                            <button class="mx-3 px-4 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-md">Edit</button>
-                            <button class="mx-3 px-4 py-1 bg-red-600 hover:bg-red-700 rounded-md">Hapus</button>
+                            <span class="flex">
+                                <a href="{{ route('input_hasil', ['id' => $s->pemeriksaan_id]) }}"
+                                    class="mx-3 px-4 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-md">Edit</a>
+
+                                <form action="{{ route('hasil_delete') }}" method="post">
+                                    <input type="hidden" name="id" id="id" value="{{ $s->pemeriksaan_id }}">
+                                    @csrf
+                                    <button class="mx-3 px-4 py-1 bg-red-600 hover:bg-red-700 rounded-md">Hapus</button>
+                                </form>
+                            </span>
                         </td>
                     </tr>
                 @endforeach

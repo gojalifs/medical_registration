@@ -45,8 +45,11 @@
                                         <li>
                                             <div class="flex items-center align-middle">
                                                 <form action="{{ route('admin.jenis.sub2.update') }}" method="post">
+                                                    @csrf
                                                     <input type="hidden" name="id" id="id"
                                                         value="{{ $item->id }}">
+                                                    <input type="hidden" name="parent_id" id="parent_id"
+                                                        value="{{ $value->id }}">
                                                     <input type="text" name="name" id="name"
                                                         class="input-nama_pemeriksaan" value="{{ $item->name }}">
                                                 </form>

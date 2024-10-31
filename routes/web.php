@@ -68,8 +68,9 @@ Route::middleware('authenticate')->group(function () {
         Route::get('/dashboard-analis', [DashboardController::class, 'analystDashboard'])->name('analyst.dashboard');
         Route::get('/pemeriksaan', [PemeriksaanController::class, 'indexAnalyst'])->name('analyst.pemeriksaan');
         Route::get('/pemeriksaan/{id}', [PemeriksaanController::class, 'showEdit'])->name('input_hasil');
-        Route::get('/pemeriksaan_data_edit', [PemeriksaanController::class, 'dataEdit']);
+        Route::get('/pemeriksaan_data_edit/{id}', [PemeriksaanController::class, 'dataEdit']);
         Route::post('/pemeriksaan', [PemeriksaanController::class, 'saveHasil'])->name('analyst.pemeriksaan.save');
+        Route::post('/pemeriksaan_del', [PemeriksaanController::class, 'destroy'])->name('hasil_delete');
     });
 
     Route::middleware('user')->group(function () {

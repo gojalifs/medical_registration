@@ -12,8 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\View\View;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class JenisPemeriksaanController extends Controller
 {
@@ -174,7 +173,7 @@ class JenisPemeriksaanController extends Controller
     {
         try {
             $jenisPemeriksaan = Sub2JenisPemeriksaan::find($request->id);
-            $jenisPemeriksaan->sub_jenis_pemeriksaan_id = $request->sub_id;
+            $jenisPemeriksaan->sub_jenis_pemeriksaan_id = $request->parent_id;
             $jenisPemeriksaan->name = $request->name;
 
             $jenisPemeriksaan->save();
