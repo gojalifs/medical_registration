@@ -28,17 +28,18 @@
                 <tbody>
                     @foreach ($data as $key => $p)
                         <tr class="even:bg-teal-50 border-b">
-                            <td class="border px-8 py-1">{{ $key + 1 }}</td>
-                            <td class="border px-8 py-1">{{ $p->name }}</td>
-                            <td class="border px-8 py-1">{{ $p->email }}</td>
-                            <td class="border px-8 py-1">{{ $p->phone }}</td>
-                            <td class="border px-8 py-1">{{ $p->gender == 'male' ? 'Laki-laki' : 'Perempuan' }}</td>
-                            <td class="border px-8 py-1">{{ $p->birth }}</td>
-                            <td class="border px-3 py-2 flex space-x-4">
-                                <button class="flex bg-green-400 rounded-sm px-2 py-1 hover:text-white group"
+                            <td class="px-8 py-1">{{ $key + 1 }}</td>
+                            <td class="px-8 py-1">{{ $p->name }}</td>
+                            <td class="px-8 py-1">{{ $p->email }}</td>
+                            <td class="px-8 py-1">{{ $p->phone }}</td>
+                            <td class="px-8 py-1">{{ $p->gender == 'male' ? 'Laki-laki' : 'Perempuan' }}</td>
+                            <td class="px-8 py-1">{{ $p->birth }}</td>
+                            <td class="px-3 py-2 flex space-x-4">
+                                <button
+                                    class="flex bg-green-400 px-2 py-1 hover:text-white group my-2 hover:bg-green-600 rounded-md text-sm items-center"
                                     data-modal-target="crud-modal{{ $key }}"
                                     data-modal-toggle="crud-modal{{ $key }}">
-                                    <svg class="w-6 h-6 text-gray-800 dark:text-white group-hover:text-white"
+                                    <svg class="w-4 h-4 text-gray-800 dark:text-white group-hover:text-white"
                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         fill="currentColor" viewBox="0 0 24 24">
                                         <path fill-rule="evenodd"
@@ -52,8 +53,8 @@
                                 <form action="{{ route('admin.analis.delete', $p->id) }}" method="POST">
                                     @csrf
                                     <button
-                                        class="flex bg-red-400 rounded-sm px-2 py-1 hover:bg-red-600 group hover:text-white">
-                                        <svg class="w-6 h-6 mr-2 text-gray-800 dark:text-white group-hover:text-white"
+                                        class="flex bg-red-400 px-2 py-1 group hover:text-white my-2 hover:bg-red-600 rounded-md text-sm items-center">
+                                        <svg class="w-4 h-4 mr-2 text-gray-800 dark:text-white group-hover:text-white"
                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                             height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd"

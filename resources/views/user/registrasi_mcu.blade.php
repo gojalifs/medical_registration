@@ -45,7 +45,7 @@
                 <input type="date" name="date" class="border-gray-200" required>
             </div>
             <hr>
-            <button type="submit" class="bg-teal-400 hover:bg-teal-500 hover:text-white px-4 py-2">Daftar Sekarang</button>
+            <button type="submit" class="bg-teal-400 hover:bg-teal-500 hover:text-white px-4 py-2 my-2 rounded-md text-sm">Daftar Sekarang</button>
         </form>
     </div>
 @endsection

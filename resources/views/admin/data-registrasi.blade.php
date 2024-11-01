@@ -3,46 +3,48 @@
 @section('dash-content')
     <div>Data Registrasi</div>
     <div class="w-full overflow-auto">
-        <table class="table-auto mt-8">
-            <thead>
-                <th class="border px-8 py-1">No.</th>
-                <th class="border px-8 py-1">Nama Pasien</th>
-
-                <th class="border px-8 py-1">Email</th>
-                <th class="border px-8 py-1">No. HP</th>
-                <th class="border px-8 py-1">Jenis Kelamin</th>
-                <th class="border px-8 py-1">Tanggal Lahir</th>
-                <th class="border px-8 py-1">Tanggal Medical</th>
-                <th class="border px-8 py-1">Analis Pemeriksa</th>
-            </thead>
-            <tbody>
-                @foreach ($data as $key => $p)
-                    <tr>
-                        <td class="border px-8 py-4">{{ $key + 1 }}</td>
-                        <td class="border px-8 py-4">{{ $p->name }}</td>
-                        <td class="border px-8 py-4">{{ $p->email }}</td>
-                        <td class="border px-8 py-4">{{ $p->phone }}</td>
-                        <td class="border px-8 py-4">{{ $p->gender == 'male' ? 'Laki-laki' : 'Perempuan' }}</td>
-                        <td class="border px-8 py-4">{{ $p->birth }}</td>
-                        <td class="border px-8 py-4">{{ $p->tanggal }}</td>
-                        <td class="border px-8 py-4">
-                            <form action="{{ route('admin.set_analyst') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="id" id="id" value="{{ $p->pemeriksaan_id }}">
-                                <select name="pemeriksa" id="pemeriksa{{ $p->id }}" onchange="this.form.submit()"
-                                    class="border-none px-4">
-                                    <option value="null" onclick="null">Belum Dipilih</option>
-                                    @foreach ($analyst as $a)
-                                        <option value="{{ $a->id }}"
-                                            {{ $p->analyst_id == $a->id ? 'selected' : '' }}>{{ $a->name }}</option>
-                                    @endforeach
-                                </select>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="relative overflow-x-auto rounded-lg">
+            <table class="table-auto w-full mt-8 border-collapse h-[1px]">
+                <thead class="bg-teal-200">
+                    <th class="border px-8 py-1">No.</th>
+                    <th class="border px-8 py-1">Nama Pasien</th>
+                    <th class="border px-8 py-1">Email</th>
+                    <th class="border px-8 py-1">No. HP</th>
+                    <th class="border px-8 py-1">Jenis Kelamin</th>
+                    <th class="border px-8 py-1">Tanggal Lahir</th>
+                    <th class="border px-8 py-1">Tanggal Medical</th>
+                    <th class="border px-8 py-1">Analis Pemeriksa</th>
+                </thead>
+                <tbody>
+                    @foreach ($data as $key => $p)
+                        <tr class="even:bg-teal-50 border-b">
+                            <td class="border px-8 py-4">{{ $key + 1 }}</td>
+                            <td class="border px-8 py-4">{{ $p->name }}</td>
+                            <td class="border px-8 py-4">{{ $p->email }}</td>
+                            <td class="border px-8 py-4">{{ $p->phone }}</td>
+                            <td class="border px-8 py-4">{{ $p->gender == 'male' ? 'Laki-laki' : 'Perempuan' }}</td>
+                            <td class="border px-8 py-4">{{ $p->birth }}</td>
+                            <td class="border px-8 py-4">{{ $p->tanggal }}</td>
+                            <td class="border px-8 py-4">
+                                <form action="{{ route('admin.set_analyst') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="id" id="id" value="{{ $p->pemeriksaan_id }}">
+                                    <select name="pemeriksa" id="pemeriksa{{ $p->id }}" onchange="this.form.submit()"
+                                        class="border-none px-4">
+                                        <option value="null" onclick="null">Belum Dipilih</option>
+                                        @foreach ($analyst as $a)
+                                            <option value="{{ $a->id }}"
+                                                {{ $p->analyst_id == $a->id ? 'selected' : '' }}>{{ $a->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="fixed top-32 right-0 mr-10 pb-10">

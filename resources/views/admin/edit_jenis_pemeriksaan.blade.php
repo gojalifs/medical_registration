@@ -3,15 +3,15 @@
 @section('dash-content')
     <div>
         <div>
-            <form action="{{ route('admin.jenis.update') }}" method="POST" class="text-xl">
+            <form action="{{ route('admin.jenis.update') }}" method="POST" class="">
                 @csrf
                 <input type="hidden" name="id" id="id" value="{{ $data->id }}">
-                <div class="flex">
+                <div class="flex items-center">
                     <div class="min-w-80"> Detail Pemeriksaan </div>
                     <input type="text" name="nama_pemeriksaan" id="nama_pemeriksaan"
                         class="italic font-bold border-0 border-b border-b-gray-300" value="{{ $data->nama_pemeriksaan }}">
                 </div>
-                <div class="flex mt-2">
+                <div class="flex mt-2 items-center">
                     <div class="min-w-80">Ruang </div>
                     <input type="text" name="room" id="room"
                         class="italic font-bold border-0 border-b border-b-gray-300" value="{{ $data->ruang }}">
@@ -30,20 +30,20 @@
                     <tbody id="body_table">
                         @foreach ($data->sub_jenis_pemeriksaan as $key => $value)
                             <tr class="mb-4 even:bg-teal-50 border-y">
-                                <td class="p-4 text-center align-top">{{ $key + 1 }}</td>
+                                <td class="p-4 text-center align-top text-sm">{{ $key + 1 }}</td>
                                 <td class="p-4 align-top">
                                     <form action="{{ route('admin.jenis.sub.update') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="jenis_id" id="jenis_id" value="{{ $data->id }}">
                                         <input type="hidden" name="id" id="id" value="{{ $value->id }}">
-                                        <input type="text" name="name" id="name" class="input-nama_pemeriksaan"
+                                        <input type="text" name="name" id="name" class="input_default"
                                             value="{{ $value->name }}">
                                     </form>
                                 </td>
                                 <td class="p-4">
-                                    <ul class="list-disc">
+                                    <ul>
                                         @foreach ($value->sub2_jenis_pemeriksaan as $item)
-                                            <li>
+                                            <li class="my-2">
                                                 <div class="flex items-center align-middle">
                                                     <form action="{{ route('admin.jenis.sub2.update') }}" method="post">
                                                         @csrf
@@ -52,7 +52,7 @@
                                                         <input type="hidden" name="parent_id" id="parent_id"
                                                             value="{{ $value->id }}">
                                                         <input type="text" name="name" id="name"
-                                                            class="input-nama_pemeriksaan" value="{{ $item->name }}">
+                                                            class="input_default" value="{{ $item->name }}">
                                                     </form>
                                                     <form action="{{ route('admin.jenis.sub2.delete') }}" method="post"
                                                         class="ml-3">
@@ -80,7 +80,7 @@
                                                 <input type="hidden" name="id" id="id"
                                                     value="{{ $value->id }}">
                                                 <input type="text" name="nama_pemeriksaan" id="nama_pemeriksaan"
-                                                    class="input-nama_pemeriksaan"
+                                                    class="input_default"
                                                     placeholder="Ketik dan enter untuk kirim">
                                             </form>
                                         </li>
@@ -103,7 +103,7 @@
                                     @csrf
                                     <input type="hidden" name="jenis_id" id="jenis_id" value="{{ $data->id }}">
                                     {{-- <input type="hidden" name="id" id="id" value="{{ $value->id }}"> --}}
-                                    <input type="text" name="name" id="name" class="input-nama_pemeriksaan"
+                                    <input type="text" name="name" id="name" class="input_default"
                                         placeholder="Masukkan Jenis Pemeriksaan Baru">
                                 </form>
                             </td>
