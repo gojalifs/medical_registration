@@ -5,12 +5,13 @@
         <div class="flex justify-between">
             <div>Data Jenis Pemeriksaan dan Ruangannya</div>
             <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-                class="flex bg-green-400 hover:bg-teal-300 px-3 py-1">
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                class="flex bg-green-400 hover:bg-teal-300 px-3 py-1 rounded-md text-sm align-middle items-center content-center">
+                <svg class="w-[16px] h-[16px] text-gray-800 dark:text-white" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M5 12h14m-7 7V5" />
                 </svg>
+
                 Tambah
             </button>
         </div>
@@ -43,8 +44,8 @@
                                 <div class="flex space-x-4 align-top h-full">
                                     <div>
                                         <a href="{{ route('admin.jenis.detail', $item->id) }}"
-                                            class="flex bg-green-400 rounded-sm px-2 py-1 hover:text-white group">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white group-hover:text-white"
+                                            class="flex bg-green-400 px-2 py-1 hover:text-white group rounded-md text-sm items-center">
+                                            <svg class="w-4 h-4 text-gray-800 dark:text-white group-hover:text-white"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" fill="currentColor" viewBox="0 0 24 24">
                                                 <path fill-rule="evenodd"
@@ -61,9 +62,9 @@
                                         <form action="{{ route('admin.jenis.delete') }}" method="post">
                                             @csrf
                                             <input type="hidden" name="id" id="id" value="{{ $item->id }}">
-                                            <button class="flex bg-red-400 rounded-sm px-2 py-1 hover:text-white group"
+                                            <button class="flex bg-red-400 px-2 py-1 hover:text-white group rounded-md text-sm items-center"
                                                 type="submit">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white group-hover:text-white"
+                                                <svg class="w-4 h-4 text-gray-800 dark:text-white group-hover:text-white"
                                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                                     height="24" fill="currentColor" viewBox="0 0 24 24">
                                                     <path fill-rule="evenodd"

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Log;
 
 class PemeriksaanController extends Controller
 {
-    public function indexAnalyst()
+    public function indexAnalyst(Request $request)
     {
         $hasilPemeriksaan = HasilPemeriksaan::where('analyst_id', '=', Auth::user()->id)->get();
         $pemeriksaan = Pemeriksaan::join('users', 'pemeriksaans.user_id', '=', 'users.id')
@@ -28,8 +28,16 @@ class PemeriksaanController extends Controller
         $selesai = Pemeriksaan::join('users', 'pemeriksaans.user_id', '=', 'users.id')
             ->where('selesai', '=', 1)
             ->where('analyst_id', '=', Auth::user()->id)
-            ->select(['*', 'pemeriksaans.id as pemeriksaan_id'])
-            ->get();
+            ->select(['*', 'pemeriksaans.id as pemeriksaan_id']);
+        // dd($request->query('search') && $request->query('search') != '');
+        
+        if ($request->query('search') && $request->query('search') != '') {
+            $selesai = $selesai->whereLike('users.name', "%{$request->query('search')}%")
+            ->orWhereLike('users.phone', "%{$request->query('search')}%");
+        }
+        // dd($selesai->toRawSql());
+
+        $selesai = $selesai->get();
 
         // dd($selesai);
 

@@ -19,101 +19,104 @@
                 <button type="submit" class="hidden"></button>
             </form>
 
-            <table class="w-full mt-8">
-                <thead class="bg-teal-200">
-                    <th>No.</th>
-                    <th>Nama Sub Pemeriksaan</th>
-                    <th>Sub Pemeriksaan</th>
-                    <th>Aksi</th>
-                </thead>
-                <tbody id="body_table">
-                    @foreach ($data->sub_jenis_pemeriksaan as $key => $value)
+            <div class="relative overflow-x-auto rounded-lg">
+                <table class="table-auto w-full mt-8 border-collapse h-[1px]">
+                    <thead class="bg-teal-200">
+                        <th class="border px-2 py-1">No.</th>
+                        <th class="border px-2 py-1">Nama Sub Pemeriksaan</th>
+                        <th class="border px-2 py-1">Sub Pemeriksaan</th>
+                        <th class="border px-2 py-1">Aksi</th>
+                    </thead>
+                    <tbody id="body_table">
+                        @foreach ($data->sub_jenis_pemeriksaan as $key => $value)
+                            <tr class="mb-4 even:bg-teal-50 border-y">
+                                <td class="p-4 text-center align-top">{{ $key + 1 }}</td>
+                                <td class="p-4 align-top">
+                                    <form action="{{ route('admin.jenis.sub.update') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="jenis_id" id="jenis_id" value="{{ $data->id }}">
+                                        <input type="hidden" name="id" id="id" value="{{ $value->id }}">
+                                        <input type="text" name="name" id="name" class="input-nama_pemeriksaan"
+                                            value="{{ $value->name }}">
+                                    </form>
+                                </td>
+                                <td class="p-4">
+                                    <ul class="list-disc">
+                                        @foreach ($value->sub2_jenis_pemeriksaan as $item)
+                                            <li>
+                                                <div class="flex items-center align-middle">
+                                                    <form action="{{ route('admin.jenis.sub2.update') }}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="id" id="id"
+                                                            value="{{ $item->id }}">
+                                                        <input type="hidden" name="parent_id" id="parent_id"
+                                                            value="{{ $value->id }}">
+                                                        <input type="text" name="name" id="name"
+                                                            class="input-nama_pemeriksaan" value="{{ $item->name }}">
+                                                    </form>
+                                                    <form action="{{ route('admin.jenis.sub2.delete') }}" method="post"
+                                                        class="ml-3">
+                                                        @csrf
+                                                        <input type="hidden" name="id" id="id"
+                                                            value="{{ $item->id }}">
+                                                        <div class="align-middle text-center items-center flex">
+                                                            <button class="text-red-400 hover:bg-red-600 hover:text-white">
+                                                                <svg class="w-6 h-6 dark:text-white" aria-hidden="true"
+                                                                    xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" fill="none" viewBox="0 0 24 24">
+                                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                                        stroke-linejoin="round" stroke-width="2"
+                                                                        d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                        <li>
+                                            <form action="{{ route('admin.jenis.addSubTes2') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="id" id="id"
+                                                    value="{{ $value->id }}">
+                                                <input type="text" name="nama_pemeriksaan" id="nama_pemeriksaan"
+                                                    class="input-nama_pemeriksaan"
+                                                    placeholder="Ketik dan enter untuk kirim">
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td class="align-top">
+                                    <form action="{{ route('admin.jenis.sub.delete') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id" id="id" value="{{ $value->id }}">
+                                        <button class="px-3 py-1 my-2 bg-red-500 hover:bg-red-600 rounded-md text-sm">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+
                         <tr class="mb-4 even:bg-teal-50 border-y">
-                            <td class="p-4 text-center align-top">{{ $key + 1 }}</td>
+                            <td class="p-4 text-center align-top">{{ isset($key) ? $key + 2 : 1 }}</td>
                             <td class="p-4 align-top">
-                                <form action="{{ route('admin.jenis.sub.update') }}" method="post">
+                                <form action="{{ route('admin.jenis.addSubTes') }}" method="post">
                                     @csrf
                                     <input type="hidden" name="jenis_id" id="jenis_id" value="{{ $data->id }}">
-                                    <input type="hidden" name="id" id="id" value="{{ $value->id }}">
+                                    {{-- <input type="hidden" name="id" id="id" value="{{ $value->id }}"> --}}
                                     <input type="text" name="name" id="name" class="input-nama_pemeriksaan"
-                                        value="{{ $value->name }}">
+                                        placeholder="Masukkan Jenis Pemeriksaan Baru">
                                 </form>
                             </td>
                             <td class="p-4">
-                                <ul class="list-disc">
-                                    @foreach ($value->sub2_jenis_pemeriksaan as $item)
-                                        <li>
-                                            <div class="flex items-center align-middle">
-                                                <form action="{{ route('admin.jenis.sub2.update') }}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="id" id="id"
-                                                        value="{{ $item->id }}">
-                                                    <input type="hidden" name="parent_id" id="parent_id"
-                                                        value="{{ $value->id }}">
-                                                    <input type="text" name="name" id="name"
-                                                        class="input-nama_pemeriksaan" value="{{ $item->name }}">
-                                                </form>
-                                                <form action="{{ route('admin.jenis.sub2.delete') }}" method="post"
-                                                    class="ml-3">
-                                                    @csrf
-                                                    <input type="hidden" name="id" id="id"
-                                                        value="{{ $item->id }}">
-                                                    <div class="align-middle text-center items-center flex">
-                                                        <button class="text-red-400 hover:bg-red-600 hover:text-white">
-                                                            <svg class="w-6 h-6 dark:text-white" aria-hidden="true"
-                                                                xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" fill="none" viewBox="0 0 24 24">
-                                                                <path stroke="currentColor" stroke-linecap="round"
-                                                                    stroke-linejoin="round" stroke-width="2"
-                                                                    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                    <li>
-                                        <form action="{{ route('admin.jenis.addSubTes2') }}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="id" id="id"
-                                                value="{{ $value->id }}">
-                                            <input type="text" name="nama_pemeriksaan" id="nama_pemeriksaan"
-                                                class="input-nama_pemeriksaan" placeholder="Ketik dan enter untuk kirim">
-                                        </form>
-                                    </li>
-                                </ul>
+                                -
                             </td>
                             <td class="align-top">
-                                <form action="{{ route('admin.jenis.sub.delete') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="id" id="id" value="{{ $value->id }}">
-                                    <button class="px-4 py-2 my-2 bg-red-500 hover:bg-red-600">Hapus</button>
-                                </form>
+                                -
                             </td>
                         </tr>
-                    @endforeach
-
-                    <tr class="mb-4 even:bg-teal-50 border-y">
-                        <td class="p-4 text-center align-top">{{ isset($key) ? $key + 2 : 1 }}</td>
-                        <td class="p-4 align-top">
-                            <form action="{{ route('admin.jenis.addSubTes') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="jenis_id" id="jenis_id" value="{{ $data->id }}">
-                                {{-- <input type="hidden" name="id" id="id" value="{{ $value->id }}"> --}}
-                                <input type="text" name="name" id="name" class="input-nama_pemeriksaan"
-                                    placeholder="Masukkan Jenis Pemeriksaan Baru">
-                            </form>
-                        </td>
-                        <td class="p-4">
-                            -
-                        </td>
-                        <td class="align-top">
-                            -
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
