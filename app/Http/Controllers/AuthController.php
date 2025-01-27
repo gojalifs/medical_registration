@@ -51,6 +51,16 @@ class AuthController extends Controller
     public function store(Request $request): RedirectResponse
     {
         try {
+            $rules = [
+                'name'      => 'required|alpha',
+                'email'     => 'required|email|unique:users,email',
+                'phone'     => 'required|numeric',
+                'birth'     => 'required',
+                'password'  => 'required|min:6',
+            ];
+
+            $request->validate($rules);
+
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
